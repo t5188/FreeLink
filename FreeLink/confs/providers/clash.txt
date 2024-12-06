@@ -1,0 +1,2 @@
+proxies:
+  #  - { type: hysteria2, password: bc97f674-1111-4940-9234-0a1da46041b9, server: 5.5.5.5, port: 31878, sni: www.bing.com, alpn: h3, skip-cert-verify: true, name: PL-s2-serv00-hy2 }
