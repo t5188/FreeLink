@@ -308,15 +308,21 @@ ranges=()
 
 output=$(whitelist_array)
 
-for range in $output; do
-  ranges+=("$range")
-done
+if [ ${#white_package_list[@]} -gt 0 ]; then
+  for range in $output; do
+    ranges+=("$range")
+  done
+fi
 
-for range in "${ranges[@]}"; do
-  echo "${action} from all uidrange ${range} priority 9000 goto 9010"
-  ip -4 rule ${action} from all uidrange ${range} priority 9000 goto 9010
-  ip -6 rule ${action} from all uidrange ${range} priority 9000 goto 9010
-done
+if [ ${#ranges[@]} -gt 0 ]; then
+  for range in "${ranges[@]}"; do
+    echo "${action} from all uidrange ${range} priority 9000 goto 9010"
+    ip -4 rule ${action} from all uidrange ${range} priority 9000 goto 9010
+    ip -6 rule ${action} from all uidrange ${range} priority 9000 goto 9010
+  done
+else
+  return
+fi
 }
 
 case "$1" in
