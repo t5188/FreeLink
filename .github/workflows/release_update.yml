@@ -35,14 +35,14 @@ jobs:
           echo '{
             "version": "'"${version}"'",
             "versionCode": "'"${versionCode}"'",
-            "zipUrl": "https://github.com/coomsn/${{ env.REPO_NAME }}/releases/download/'"${version}"'/FreeLink-'${version}'.zip",
-            "changelog": "https://github.com/coomsn/${{ env.REPO_NAME }}/raw/main/CHANGELOG.md"
+            "zipUrl": "https://github.com/t5188/${{ env.REPO_NAME }}/releases/download/'"${version}"'/FreeLink-'${version}'.zip",
+            "changelog": "https://github.com/t5188/${{ env.REPO_NAME }}/raw/main/CHANGELOG.md"
           }' > update.json
 
       # Step 5: Commit and push update.json
       - name: Commit and push update.json
         run: |
-          git config --local user.name "coomsn"
+          git config --local user.name "t5188"
           git config --local user.email "acstudycn@gmail.com"
           git add update.json
           git commit -m "Update update.json for version $(grep -oP 'version=\K[^ ]+' module.prop)" || true
