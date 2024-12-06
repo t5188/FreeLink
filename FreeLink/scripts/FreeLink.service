@@ -144,12 +144,13 @@ iptables_rules "ip6tables" "${action}"
 }
 
 start_FreeLink() {
-if pidof "${bin_box}" > /dev/null 2>&1; then
-    log Info "Close existing processes $(pidof ${bin_box})" 
-    stop_FreeLink
-fi
 if [ -f "${bin_box}" ]; then
   log info "---welcome---" > "${scripts_dir}/run.log"
+    if pidof ${bin_box} > /dev/null 2>&1; then
+        log Info "Close existing processes $(pidof ${bin_box})"
+        stop_TproxyLink
+        log info "---restart---" > "${scripts_dir}/run.log"
+    fi
   log info "slot$(getprop ro.boot.slot_suffix)" >> "${scripts_dir}/run.log"
   chmod +x ${bin_box}
   chown root:net_admin ${bin_box}
