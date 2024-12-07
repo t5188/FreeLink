@@ -29,8 +29,11 @@ jobs:
             echo "Deleting release $latest_release_tag"
             # 删除 release
             gh release delete $latest_release_tag --yes
-            # 删除标签
+            # 确保获取所有远程标签
+            git fetch --tags
+            # 删除本地标签
             git tag -d $latest_release_tag
+            # 删除远程标签
             git push origin --delete $latest_release_tag
           else
             echo "No release found to delete."
