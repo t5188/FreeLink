@@ -8,8 +8,6 @@
 - 确定了可用于相对路径引用的路径。
 - 当白名单或黑名单数组为空时，默认将所有流量进行路由处理。
 
-# Version 1.5
-
 ## Update Notes
 
 This release includes the following updates:
