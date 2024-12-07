@@ -66,8 +66,6 @@ if [ -n "$largest_folder" ]; then
     clean_name=$(echo "$folder" | sed 's/.*FreeLink//' | sed 's/_//g')
     if [ "$clean_name" = "$largest_folder" ]; then
       ui_print "- Found folder: $folder"
-      
-      # 覆盖 /data/adb/FreeLink/confs 目录中的内容
       if [ -d "$folder/confs" ]; then
         cp -rf "$folder/confs/"* /data/adb/FreeLink/confs/
         ui_print "- Copied contents of $folder/confs to /data/adb/FreeLink/confs/"
