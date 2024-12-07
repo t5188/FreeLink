@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Execute Delete Workflow
-        uses: ./.github/workflows/Delete.yml  # 调用已有的 Delete.yml 工作流
+        uses: ./.github/workflows/delete.yml  # 调用已有的 delete.yml 工作流
 
       - name: Execute Release Update Workflow
-        uses: ./.github/workflows/release_update.yml  # 调用已有的 release_update.yml 工作流
+        uses: ./.github/workflows/update.yml  # 调用已有的 release_update.yml 工作流
