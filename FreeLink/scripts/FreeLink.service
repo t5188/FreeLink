@@ -145,13 +145,13 @@ iptables_rules "ip6tables" "${action}"
 
 start_FreeLink() {
 if [ -f "${bin_box}" ]; then
-  log info "---welcome---" > "${scripts_dir}/run.log"
+  log Info "---welcome---" > "${scripts_dir}/run.log"
     if pidof ${bin_box} > /dev/null 2>&1; then
         log Info "Close existing processes $(pidof ${bin_box})"
         stop_TproxyLink
-        log info "---restart---" > "${scripts_dir}/run.log"
+        log Info "---restart---" > "${scripts_dir}/run.log"
     fi
-  log info "slot$(getprop ro.boot.slot_suffix)" >> "${scripts_dir}/run.log"
+  log Info "slot$(getprop ro.boot.slot_suffix)" >> "${scripts_dir}/run.log"
   chmod +x ${bin_box}
   chown root:net_admin ${bin_box}
   nohup busybox setuidgid ${box_user}:${box_group} ${bin_box} run -C ${box_confs_dir} -D ${parent_dir}/binary/ > /dev/null 2>&1 &
@@ -177,8 +177,8 @@ stop_FreeLink() {
   if ! pidof "${bin_box}" > /dev/null 2>&1; then
       exit 1
   fi
-  log info "---goodbye---" > "${scripts_dir}/run.log"
-  log info "slot$(getprop ro.boot.slot_suffix)" >> "${scripts_dir}/run.log"
+  log Info "---goodbye---" > "${scripts_dir}/run.log"
+  log Info "slot$(getprop ro.boot.slot_suffix)" >> "${scripts_dir}/run.log"
   forward -D
   whitelist_rules del
   pid=$(pidof sing-box 2> /dev/null)
