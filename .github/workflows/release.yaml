@@ -1,0 +1,18 @@
+name: Delete and Release Workflow
+
+on:
+  workflow_dispatch:  # 手动触发工作流
+
+jobs:
+  delete-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Execute Delete Workflow
+        uses: ./.github/workflows/Delete.yml  # 调用已有的 Delete.yml 工作流
+
+      - name: Execute Release Update Workflow
+        uses: ./.github/workflows/release_update.yml  # 调用已有的 release_update.yml 工作流
