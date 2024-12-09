@@ -148,7 +148,7 @@ if [ -f "${bin_box}" ]; then
   log Info "---welcome---" > "${scripts_dir}/run.log"
     if pidof ${bin_box} > /dev/null 2>&1; then
         log Info "Close existing processes $(pidof ${bin_box})"
-        stop_TproxyLink
+        stop_FreeLink
         log Info "---restart---" > "${scripts_dir}/run.log"
     fi
   log Info "slot$(getprop ro.boot.slot_suffix)" >> "${scripts_dir}/run.log"
@@ -195,21 +195,20 @@ stop_FreeLink() {
 
 # version
 version() {
-if [ -f "${bin_box}" ]; then
-  version=$(${bin_box} version | head -n 1 | awk '{print $3}')
-fi
+version_box=$(${bin_box} version | head -n 1 | awk '{print $3}')
+version_xray=$(${bin_xray} version | head -n 1 | awk '{print $2}')
 }
-# description
+
 description() {
-  local symbol=$1
-  local event=$2
-  local network_mode="tun"
-  version
-  prop_file="/data/adb/modules/FreeLink/module.prop"
-  core_name="${bin_box##*/}"
-  current_time=$(date "+[%m.%d %H:%M]")
-  sed -i "/description/c\description=${current_time} ${symbol} ${core_name} ${version} ${network_mode} ${event}" "${prop_file}"
-  log Info "${symbol} ${network_mode} ${event}" >> "${scripts_dir}/run.log"
+local symbol=$1
+local event=$2
+version
+prop_file="/data/adb/modules/FreeLink/module.prop"
+core_name_box="${bin_box##*/}"
+core_name_xray="${bin_xray##*/}"
+current_time=$(date "+[%m.%d %H:%M]")
+sed -i "/description/c\description=${current_time} ${symbol} ${core_name_box} ${version_box} work with ${core_name_xray} ${version_xray} ${network_mode} ${event}" "${prop_file}"
+log Info "${symbol} ${network_mode} ${event}" >> "${scripts_dir}/run.log"
 }
 
 # description
