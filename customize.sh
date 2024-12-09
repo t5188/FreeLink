@@ -37,6 +37,7 @@ unzip -j -o "$ZIPFILE" 'FreeLink.sh' -d /data/adb/service.d >&2
 unzip -j -o "$ZIPFILE" 'uninstall.sh' -d $MODPATH >&2
 unzip -j -o "$ZIPFILE" "action.sh" -d $MODPATH >&2
 unzip -j -o "$ZIPFILE" "module.prop" -d $MODPATH >&2
+unzip -j -o "$ZIPFILE" "system.prop" -d $MODPATH >&2
 ui_print "- 正在设置权限"
 set_perm_recursive $MODPATH 0 0 0755 0644
 set_perm_recursive /data/adb/FreeLink/ 0 3005 0755 0644
